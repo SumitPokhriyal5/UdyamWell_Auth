@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import nodemailer, { SendMailOptions, SentMessageInfo } from 'nodemailer';
 import otpGenerator from 'otp-generator';
 import { UserModel } from '../models/User.model.js';
@@ -8,7 +8,7 @@ import bcrypt from 'bcrypt';
 dotenv.config();
 
 // Send OTP
-const sendOtp = async (req: Request, res: Response, next: NextFunction) => {
+const sendOtp = async (req: Request, res: Response) => {
   const { email } = req.body;
 
   let user = await UserModel.findOne({ email });
@@ -38,12 +38,9 @@ const sendOtp = async (req: Request, res: Response, next: NextFunction) => {
     // send mail with defined transport object
     transporter.sendMail(mailOptions, (error: Error | null, info: SentMessageInfo) => {
       if (error) {
-        console.log('error occurred :T');
         res.send(error);
       } else {
-        console.log('Email sent: ' + info.response);
         res.status(200).send({ sentOtp: otp, email, otpSentTime: Date.now() });
-        next();
       }
     });
   } else {
@@ -52,7 +49,7 @@ const sendOtp = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // Verify OTP
-const verifyOtp = async (req: Request, res: Response, next: NextFunction) => {
+const verifyOtp = async (req: Request, res: Response) => {
   const { email, otp, sentOtp, otpSentTime } = req.body;
 
   if (email && sentOtp && otpSentTime) {
@@ -61,7 +58,7 @@ const verifyOtp = async (req: Request, res: Response, next: NextFunction) => {
 
     if (otp === sentOtp && timeDiff <= 120000) {
       // OTP is valid for 2 minutes
-      next();
+      res.status(200).send("OTP verified successfully");
     } else if (otp !== sentOtp) {
       res.status(401).send('Invalid OTP');
     } else if (timeDiff > 120000) {
