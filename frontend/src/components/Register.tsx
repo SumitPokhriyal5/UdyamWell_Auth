@@ -14,9 +14,7 @@ import {
   InputGroup,
   Link,
   Checkbox,
-  useToast,
-  RadioGroup,
-  Radio,
+  useToast
 } from "@chakra-ui/react";
 
 import "../scss/register.scss";
