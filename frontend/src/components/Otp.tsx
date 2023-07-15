@@ -26,15 +26,11 @@ interface OtpPageProps {
   setOtpComp: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const OtpPage: React.FC<OtpPageProps> = ({
-  setForgotPage,
-  setOtpComp,
-}) => {
+const OtpPage: React.FC<OtpPageProps> = ({ setForgotPage, setOtpComp }) => {
   const [load, setLoad] = useState(false);
   const [otpLoad, setOtpLoad] = useState(false);
   const [otp, setOtp] = useState("");
   const [timer, setTimer] = useState(120);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [isNewPass, setIsNewPass] = useState(false);
 
   const data = JSON.parse(localStorage.getItem("otpDetails") || "");
@@ -45,7 +41,6 @@ const OtpPage: React.FC<OtpPageProps> = ({
     const newIntervalId = setInterval(() => {
       setTimer((prev) => Math.max(prev - 1, 0));
     }, 1000);
-    setIntervalId(newIntervalId);
     return () => clearInterval(newIntervalId);
   }, []);
 
@@ -53,9 +48,12 @@ const OtpPage: React.FC<OtpPageProps> = ({
   const sendOtpAgain = async () => {
     setOtpLoad(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/sendOtp`, {
-        email: data.email,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/users/sendOtp`,
+        {
+          email: data.email,
+        }
+      );
       setOtpLoad(false);
       console.log(res);
       setTimer(120);
@@ -63,7 +61,8 @@ const OtpPage: React.FC<OtpPageProps> = ({
       toast({
         position: "top",
         title: "Email Sent Successful",
-        description: "Password reset OTP sent! Please check your email for further instructions.",
+        description:
+          "Password reset OTP sent! Please check your email for further instructions.",
         status: "success",
         duration: 9000,
         isClosable: true,
@@ -78,7 +77,8 @@ const OtpPage: React.FC<OtpPageProps> = ({
         toast({
           position: "top",
           title: "Wrong Email",
-          description: "Sorry, we couldn't find an account associated with that email.",
+          description:
+            "Sorry, we couldn't find an account associated with that email.",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -93,20 +93,24 @@ const OtpPage: React.FC<OtpPageProps> = ({
     setLoad(true);
     console.log(otp);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/verifyOtp`, data);
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/users/verifyOtp`,
+        data
+      );
       console.log(res);
       setLoad(false);
       // Display success toast when OTP is verified successfully
       toast({
         position: "top",
         title: "OTP verified successfully",
-        description: "OTP Verified Successfully. You're one step closer to securing your account with a new password.",
+        description:
+          "OTP Verified Successfully. You're one step closer to securing your account with a new password.",
         status: "success",
         duration: 9000,
         isClosable: true,
         onCloseComplete: () => setIsNewPass(true),
       });
-    } catch (e:any) {
+    } catch (e: any) {
       setLoad(false);
       console.log(e.response.data);
       if (e.response.data === "Invalid OTP") {
@@ -114,7 +118,8 @@ const OtpPage: React.FC<OtpPageProps> = ({
         toast({
           position: "top",
           title: "Invalid OTP",
-          description: "The OTP you entered is incorrect. Please check and try again.",
+          description:
+            "The OTP you entered is incorrect. Please check and try again.",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -145,7 +150,11 @@ const OtpPage: React.FC<OtpPageProps> = ({
 
   // Render the NewPassword component when isNewPass is true, otherwise render the OTP verification UI
   return isNewPass ? (
-    <NewPassword setOtpComp={setOtpComp} setForgotPage={setForgotPage} setIsNewPass={setIsNewPass} />
+    <NewPassword
+      setOtpComp={setOtpComp}
+      setForgotPage={setForgotPage}
+      setIsNewPass={setIsNewPass}
+    />
   ) : (
     <>
       <ModalOverlay />
@@ -158,7 +167,7 @@ const OtpPage: React.FC<OtpPageProps> = ({
                 Unlock your account with a new password
               </Text>
             </Box>
-            <Box display="grid" alignItems={"end"}>
+            <Box display="grid" alignItems={"end"} justifyContent={"center"}>
               <Image src={logo} />
             </Box>
           </Box>
@@ -195,7 +204,9 @@ const OtpPage: React.FC<OtpPageProps> = ({
                   </Box>
                 ) : (
                   <HStack justify={"center"} mt={5}>
-                    <Text fontSize={{ base: "sm", sm: "md" }}>Didn't receive the code? </Text>
+                    <Text fontSize={{ base: "sm", sm: "md" }}>
+                      Didn't receive the code?{" "}
+                    </Text>
                     <Button
                       size="sm"
                       variant="link"
@@ -216,7 +227,7 @@ const OtpPage: React.FC<OtpPageProps> = ({
                     focusBorderColor="brand.500"
                     size="lg"
                     type="number"
-                    otp={timer > 0 ? undefined : true}//fix the type error otp={otp}
+                    otp={timer > 0 ? undefined : true} //fix the type error otp={otp}
                     onChange={(value) => {
                       setOtp(value);
                     }}
@@ -230,11 +241,8 @@ const OtpPage: React.FC<OtpPageProps> = ({
               </Box>
               <Stack spacing={6}>
                 <Button
-                  bg={"blue.400"}
                   color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
+                  colorScheme="green"
                   onClick={handleOtpVerify}
                   isLoading={load}
                   loadingText="Verifying..."

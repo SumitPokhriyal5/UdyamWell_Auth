@@ -19,7 +19,7 @@ import {
   Radio,
 } from "@chakra-ui/react";
 
-import '../scss/register.scss'
+import "../scss/register.scss";
 import logo from "../assets/logo.png";
 
 // import { Link as RouteLink } from "react-router-dom";
@@ -36,13 +36,12 @@ const EMAIL_REGEX = /^[\w]+@([\w-]+\.)+[\w-]{3}$/g;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const NUM_REGEX = /^\d{10}$/;
 
-const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>> }> = ({
-  setPage
-}) => {
+const Register: React.FC<{
+  setPage: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setPage }) => {
   const [load, setLoad] = useState<boolean>(false);
 
   const toast = useToast();
-
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPwd, setShowConfirmPwd] = useState<boolean>(false);
@@ -77,10 +76,10 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
     setValidEmail(result);
   }, [email]);
 
-  useEffect(() =>{
+  useEffect(() => {
     const result = NUM_REGEX.test(contactNum);
-    setValidNum(result)
-  },[contactNum])
+    setValidNum(result);
+  }, [contactNum]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pwd);
@@ -88,7 +87,6 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
     setValidMatch(pwd === matchPwd);
   }, [pwd, matchPwd]);
 
-  
   const handleSubmit = async () => {
     setLoad(true);
     try {
@@ -97,7 +95,7 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
         name,
         email,
         password: pwd,
-        contact_number:contactNum,
+        contact_number: contactNum,
       });
       setLoad(false);
       toast({
@@ -109,7 +107,7 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
         isClosable: true,
         onCloseComplete: () => setPage(false),
       });
-    } catch (error:any ) {
+    } catch (error: any) {
       setLoad(false);
       toast({
         position: "top",
@@ -127,7 +125,12 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
       <ModalOverlay />
       <ModalContent>
         <Box className="container">
-          <Box className="left_col" display="flex" flexDirection="column" alignItems="center">
+          <Box
+            className="left_col"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
             <Box display="flex" flexDirection="column" gap={3}>
               <Heading>Looks like you're new here!</Heading>
               <Text color="#d7d8dc" fontWeight="500">
@@ -146,7 +149,9 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                 <FormLabel display="flex" alignItems="center">
                   Name
                   <FaCheck className={validName ? "valid" : "hide"} />
-                  <ImCross className={validName || !name ? "hide" : "invalid"} />
+                  <ImCross
+                    className={validName || !name ? "hide" : "invalid"}
+                  />
                 </FormLabel>
                 <Input
                   type="text"
@@ -156,7 +161,13 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                   placeholder="Sumit Pokhriyal"
                   onBlur={() => setNameFocus(true)}
                 />
-                <Text className={nameFocus && !validName ? "instructions" : "offscreen"} display="flex" alignItems="center">
+                <Text
+                  className={
+                    nameFocus && !validName ? "instructions" : "offscreen"
+                  }
+                  display="flex"
+                  alignItems="center"
+                >
                   <BsFillExclamationTriangleFill />
                   User name allowed from 3-20 characters.
                 </Text>
@@ -166,7 +177,9 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                 <FormLabel display="flex" alignItems="center">
                   Email
                   <FaCheck className={validEmail ? "valid" : "hide"} />
-                  <ImCross className={validEmail || !email ? "hide" : "invalid"} />
+                  <ImCross
+                    className={validEmail || !email ? "hide" : "invalid"}
+                  />
                 </FormLabel>
                 <Input
                   type="email"
@@ -177,7 +190,13 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                   onBlur={() => setEmailFocus(true)}
                   required
                 />
-                <Text className={emailFocus && !validEmail ? "instructions" : "offscreen"} display="flex" alignItems="center">
+                <Text
+                  className={
+                    emailFocus && !validEmail ? "instructions" : "offscreen"
+                  }
+                  display="flex"
+                  alignItems="center"
+                >
                   <BsFillExclamationTriangleFill />
                   The email address format is invalid.
                 </Text>
@@ -187,7 +206,9 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                 <FormLabel display="flex" alignItems="center">
                   Contact Number
                   <FaCheck className={validNum ? "valid" : "hide"} />
-                  <ImCross className={validNum || !contactNum ? "hide" : "invalid"} />
+                  <ImCross
+                    className={validNum || !contactNum ? "hide" : "invalid"}
+                  />
                 </FormLabel>
                 <Input
                   type="number"
@@ -197,14 +218,20 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                   placeholder="Enter your contact number"
                   onBlur={() => setNumFocus(true)}
                 />
-                <Text className={numFocus && !validNum ? "instructions" : "offscreen"} display="flex" alignItems="center">
+                <Text
+                  className={
+                    numFocus && !validNum ? "instructions" : "offscreen"
+                  }
+                  display="flex"
+                  alignItems="center"
+                >
                   <BsFillExclamationTriangleFill />
                   Invalid contact number. Please enter a 10-digit number.
                 </Text>
               </FormControl>
               {/* password */}
               <FormControl id="password">
-              <FormLabel display="flex" alignItems="center">
+                <FormLabel display="flex" alignItems="center">
                   Password
                   <FaCheck className={validPwd ? "valid" : "hide"} />
                   <ImCross className={validPwd || !pwd ? "hide" : "invalid"} />
@@ -223,17 +250,26 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                   <InputRightElement h="full">
                     <Button
                       variant="ghost"
-                      onClick={() => setShowPassword((showPassword) => !showPassword)}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
                     >
                       {showPassword ? <ViewIcon /> : <ViewOffIcon />}
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <Text className={pwdFocus && !validPwd ? "instructions" : "offscreen"} display="flex" alignItems="start">
+                <Text
+                  className={
+                    pwdFocus && !validPwd ? "instructions" : "offscreen"
+                  }
+                  display="flex"
+                  alignItems="start"
+                >
                   <BsFillExclamationTriangleFill />
                   8 to 24 characters.
                   <br />
-                  Must include uppercase and lowercase letters, a number and a special character.
+                  Must include uppercase and lowercase letters, a number and a
+                  special character.
                   <br />
                   Allowed special characters: ! @ # $ %
                 </Text>
@@ -241,8 +277,12 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
               <FormControl>
                 <FormLabel display="flex" alignItems="center">
                   Confirm Password
-                  <FaCheck className={validMatch && matchPwd ? "valid" : "hide"} />
-                  <ImCross className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                  <FaCheck
+                    className={validMatch && matchPwd ? "valid" : "hide"}
+                  />
+                  <ImCross
+                    className={validMatch || !matchPwd ? "hide" : "invalid"}
+                  />
                 </FormLabel>
                 <InputGroup>
                   <Input
@@ -257,21 +297,35 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                   <InputRightElement h="full">
                     <Button
                       variant="ghost"
-                      onClick={() => setShowConfirmPwd((showConfirmPwd) => !showConfirmPwd)}
+                      onClick={() =>
+                        setShowConfirmPwd((showConfirmPwd) => !showConfirmPwd)
+                      }
                     >
                       {showConfirmPwd ? <ViewIcon /> : <ViewOffIcon />}
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <Text className={matchFocus && !validMatch ? "instructions" : "offscreen"} display="flex" alignItems="center">
+                <Text
+                  className={
+                    matchFocus && !validMatch ? "instructions" : "offscreen"
+                  }
+                  display="flex"
+                  alignItems="center"
+                >
                   <BsFillExclamationTriangleFill />
                   Password does not match the confirm password.
                 </Text>
               </FormControl>
 
               <Stack mt="10px" spacing={3}>
-                <Stack direction={{ base: "column", sm: "row" }} align="start" justify="start">
-                  <Checkbox onChange={() => setIsChecked(!isChecked)}>I accept</Checkbox>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align="start"
+                  justify="start"
+                >
+                  <Checkbox onChange={() => setIsChecked(!isChecked)}>
+                    I accept
+                  </Checkbox>
                   <Link color="blue.500">Terms of Service</Link>
                 </Stack>
                 <Box>
@@ -293,14 +347,19 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
                     Sign Up
                   </Button>
                 </Box>
-                <Box color="blue.500" display="flex" gap={1} justifyContent="center">
+                <Box
+                  color="blue.500"
+                  display="flex"
+                  gap={1}
+                  justifyContent="center"
+                >
                   <Text color="black">Existing User?</Text>
-                    <Text
-                      _hover={{ textDecoration: "underline" }}
-                      onClick={() => setPage(false)}
-                    >
-                      Log in
-                    </Text>
+                  <Text
+                    _hover={{ textDecoration: "underline" }}
+                    onClick={() => setPage(false)}
+                  >
+                    Log in
+                  </Text>
                 </Box>
               </Stack>
             </Box>
@@ -312,4 +371,3 @@ const Register: React.FC<{ setPage: React.Dispatch<React.SetStateAction<boolean>
 };
 
 export default Register;
-

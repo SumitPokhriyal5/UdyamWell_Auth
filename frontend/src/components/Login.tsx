@@ -16,14 +16,20 @@ import {
   Center,
   useToast,
 } from "@chakra-ui/react";
-import axios from 'axios';
+import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 import "../scss/login.scss";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
 import ForgotPassword from "./ForgotPassword";
 
-const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAction<boolean>>, onClose: () => void }) => {
+const Login = ({
+  setPage,
+  onClose,
+}: {
+  setPage: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
+}) => {
   const [load, setLoad] = useState(false);
 
   const toast = useToast();
@@ -33,17 +39,19 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
-
   const handleLogin: () => Promise<void> = async () => {
     setLoad(true);
     try {
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/login`, {
-        email,
-        password: pwd
-      });
-      console.log(res.data)
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/users/login`,
+        {
+          email,
+          password: pwd,
+        }
+      );
+      console.log(res.data);
       setLoad(false);
-      localStorage.setItem('token', JSON.stringify(res.data.token));
+      localStorage.setItem("token", JSON.stringify(res.data.token));
       toast({
         position: "top",
         title: "Login Successful.",
@@ -54,13 +62,14 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
         onCloseComplete: onClose,
       });
     } catch (e: any) {
-      console.log(e)
-      setLoad(false)
+      console.log(e);
+      setLoad(false);
       if (e.response?.data === "Incorrect password") {
         toast({
           position: "top",
           title: "Wrong Password",
-          description: "Incorrect Password. Please try again or click on Forgot Password to reset it",
+          description:
+            "Incorrect Password. Please try again or click on Forgot Password to reset it",
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -69,13 +78,13 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
         toast({
           position: "top",
           title: "Wrong Email",
-          description: "Sorry, we couldn't find an account associated with that email.",
+          description:
+            "Sorry, we couldn't find an account associated with that email.",
           status: "error",
           duration: 9000,
           isClosable: true,
         });
-      }
-      else {
+      } else {
         toast({
           position: "top",
           title: "Something Went Wrong",
@@ -88,7 +97,7 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
     }
   };
 
-  const signInWithGoogle = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const signInWithGoogle = () => {
     // setLoad(true);
   };
 
@@ -103,7 +112,8 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
             <Box display={"flex"} flexDirection="column" gap={"10px"}>
               <Heading>Login</Heading>
               <Text color={"#d7d8dc"} fontWeight="500">
-                Get access to your Orders, WishList and Recommendations
+                Get access to a wealth of resources, personalized support, and a
+                strong community to help you on your entrepreneurial journey.
               </Text>
             </Box>
             <Box display="grid" alignItems={"end"} justifyContent={"center"}>
@@ -155,7 +165,9 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
                   onClick={() => setForgotPage(true)}
                   cursor="pointer"
                 >
-                  <Text _hover={{ textDecoration: "underline" }}>Forgot your Password?</Text>
+                  <Text _hover={{ textDecoration: "underline" }}>
+                    Forgot your Password?
+                  </Text>
                 </Box>
               </FormControl>
               <Stack spacing={6}>
@@ -193,8 +205,13 @@ const Login = ({ setPage, onClose }: { setPage: React.Dispatch<React.SetStateAct
                 gap={1}
                 justifyContent="center"
               >
-                <Text color={'black'}>New to Fashion Gallery?</Text>
-                  <Text onClick={() => setPage(true)} _hover={{ textDecoration: "underline" }}>Create an account</Text>
+                <Text color={"black"}>New to UdyamWell?</Text>
+                <Text
+                  onClick={() => setPage(true)}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  Create an account
+                </Text>
               </Box>
             </Box>
           </Box>

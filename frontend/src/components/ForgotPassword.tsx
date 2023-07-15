@@ -13,7 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import "../scss/login.scss";
-import logo from '../assets/logo.png';
+import logo from "../assets/logo.png";
 import axios from "axios";
 import OtpPage from "./Otp";
 
@@ -33,28 +33,33 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setForgotPage }) => {
     setLoad(true); // Start loading
     try {
       // Send OTP request to the server
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users/sendOtp`, {
-        email,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/users/sendOtp`,
+        {
+          email,
+        }
+      );
       setLoad(false); // Stop loading
       localStorage.setItem("otpDetails", JSON.stringify(res.data)); // Store OTP details
       toast({
-        position: 'top',
-        title: 'Email Sent Successful',
-        description: "Password reset OTP sent! Please check your email for further instructions.",
-        status: 'success',
+        position: "top",
+        title: "Email Sent Successful",
+        description:
+          "Password reset OTP sent! Please check your email for further instructions.",
+        status: "success",
         duration: 9000,
         isClosable: true,
         onCloseComplete: () => setOtpComp(true),
       });
-    } catch (err:any) {
+    } catch (err: any) {
       setLoad(false); // Stop loading
       if (err.response.data === "Email is not registered") {
         toast({
-          position: 'top',
-          title: 'Wrong Email',
-          description: "Sorry, we couldn't find an account associated with that email.",
-          status: 'error',
+          position: "top",
+          title: "Wrong Email",
+          description:
+            "Sorry, we couldn't find an account associated with that email.",
+          status: "error",
           duration: 9000,
           isClosable: true,
         });
@@ -111,11 +116,8 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setForgotPage }) => {
               </FormControl>
               <Stack spacing={6}>
                 <Button
-                  bg={"blue.400"}
                   color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
+                  colorScheme="green"
                   isLoading={load}
                   loadingText="Sending OTP..."
                   onClick={handleForgotPass}
@@ -123,8 +125,17 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setForgotPage }) => {
                   Send OTP
                 </Button>
               </Stack>
-              <Box color={"blue.500"} display={"flex"} gap={1} justifyContent="center" cursor={'pointer'}>
-                <Text onClick={() => setForgotPage(false)} _hover={{ textDecoration: "underline" }}>
+              <Box
+                color={"blue.500"}
+                display={"flex"}
+                gap={1}
+                justifyContent="center"
+                cursor={"pointer"}
+              >
+                <Text
+                  onClick={() => setForgotPage(false)}
+                  _hover={{ textDecoration: "underline" }}
+                >
                   Click here to login
                 </Text>
               </Box>

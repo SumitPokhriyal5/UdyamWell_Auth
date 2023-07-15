@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -7,20 +7,14 @@ import {
   useColorModeValue,
   Image,
   Modal,
-} from '@chakra-ui/react';
-import Register from './Register';
-import Login from './Login';
-import image from '../assets/logo.png'
-
+} from "@chakra-ui/react";
+import Register from "./Register";
+import Login from "./Login";
+import image from "../assets/logo.png";
 
 const Navbar: React.FC = () => {
-
-
-    const tkn: string | null = localStorage.getItem('token');
-    const token: string = tkn ?? "";
-
-
-  
+  const tkn: string | null = localStorage.getItem("token");
+  const token: string = tkn ?? "";
 
   const [page, setPage] = useState(false);
 
@@ -30,7 +24,7 @@ const Navbar: React.FC = () => {
   const closeModal = () => setModalIsOpen(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     openModal();
   };
 
@@ -45,20 +39,19 @@ const Navbar: React.FC = () => {
       top="0px"
     >
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
+        bg={useColorModeValue("white", "gray.800")}
+        color={useColorModeValue("gray.600", "white")}
         minH="60px"
         py={{ base: 2 }}
         pr={{ base: 4 }}
         borderBottom={2}
         borderStyle="solid"
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
         display={"flex"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        
       >
-        <Flex justify={{ base: 'center', md: 'center' }}>
+        <Flex justify={{ base: "center", md: "center" }}>
           <Image src={image} h="50px" w="60px" borderRadius="50%" />
         </Flex>
 
@@ -76,8 +69,18 @@ const Navbar: React.FC = () => {
         )}
         {/* Render sign-in button if token does not exist */}
         {!token && (
-          <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
-            <Button fontSize="sm" fontWeight={400} colorScheme='green' onClick={openModal}>
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify="flex-end"
+            direction="row"
+            spacing={6}
+          >
+            <Button
+              fontSize="sm"
+              fontWeight={400}
+              colorScheme="green"
+              onClick={openModal}
+            >
               Sign In
             </Button>
           </Stack>

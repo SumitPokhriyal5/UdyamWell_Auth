@@ -50,8 +50,8 @@ const NewPassword = ({
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
-  const tempData = localStorage.getItem("otpDetails")
-  const data = tempData ? JSON.parse(tempData) : ""
+  const tempData = localStorage.getItem("otpDetails");
+  const data = tempData ? JSON.parse(tempData) : "";
 
   useEffect(() => {
     // Validate password against regex pattern
@@ -224,11 +224,8 @@ const NewPassword = ({
               </FormControl>
               <Stack spacing={6}>
                 <Button
-                  bg={"blue.400"}
                   color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
+                  colorScheme="green"
                   onClick={handleNewPass}
                   isLoading={load}
                   loadingText="Saving Password..."
