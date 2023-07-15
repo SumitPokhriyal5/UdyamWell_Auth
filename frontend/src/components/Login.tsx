@@ -52,6 +52,8 @@ const Login = ({
       console.log(res.data);
       setLoad(false);
       localStorage.setItem("token", JSON.stringify(res.data.token));
+      localStorage.setItem("name", JSON.stringify(res.data.name));
+      
       toast({
         position: "top",
         title: "Login Successful.",

@@ -7,6 +7,7 @@ import {
   useColorModeValue,
   Image,
   Modal,
+  Avatar,
 } from "@chakra-ui/react";
 import Register from "./Register";
 import Login from "./Login";
@@ -14,7 +15,10 @@ import image from "../assets/logo.png";
 
 const Navbar: React.FC = () => {
   const tkn: string | null = localStorage.getItem("token");
-  const token: string = tkn ?? "";
+  const token: string = tkn ? JSON.parse(tkn) : "";
+  
+  const name: string | null = localStorage.getItem("name");
+  const parsedName: string = name ? JSON.parse(name) : "";
 
   const [page, setPage] = useState(false);
 
@@ -57,15 +61,22 @@ const Navbar: React.FC = () => {
 
         {/* Render logout button if token exists */}
         {token && (
+          <Stack
+          flex={{ base: 1, md: 0 }}
+          justify="flex-end"
+          direction="row"
+          spacing={6}
+        >
+          <Avatar name={parsedName} src='https://bit.ly/tioluwani-kolawole' />
           <Button
-            bgColor="white"
-            color="#4e8cf3"
             variant="outline"
+            colorScheme="red"
             onClick={handleLogout}
             fontWeight="bold"
           >
             Logout
           </Button>
+          </Stack>
         )}
         {/* Render sign-in button if token does not exist */}
         {!token && (

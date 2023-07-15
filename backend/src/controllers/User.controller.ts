@@ -68,7 +68,7 @@ const registerUser = async (req: Request, res: Response) => {
         if (result) {
           const token = jwt.sign({ userID: user._id }, process.env.secretKey);
           user.save();
-          res.send({ msg: 'Login Successful', token: token });
+          res.send({ msg: 'Login Successful', token: token, name: user.name });
         } else {
           res.status(401).send('Incorrect password');
         }

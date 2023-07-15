@@ -19,7 +19,6 @@ import "../scss/login.scss";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import NewPassword from "./NewPassword";
-// import NewPassword from "./NewPass";
 
 interface OtpPageProps {
   setForgotPage: React.Dispatch<React.SetStateAction<boolean>>;
