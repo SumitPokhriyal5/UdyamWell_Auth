@@ -135,6 +135,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ setForgotPage }) => {
                 <Text
                   onClick={() => setForgotPage(false)}
                   _hover={{ textDecoration: "underline" }}
+                  cursor={'pointer'}
                 >
                   Click here to login
                 </Text>

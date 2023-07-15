@@ -112,7 +112,7 @@ const NewPassword = ({
                 Secure Your Account with a New Password
               </Text>
             </Box>
-            <Box display="grid" alignItems={"end"}>
+            <Box display="grid" alignItems={"end"} justifyContent={'center'}>
               <Image src={logo}></Image>
             </Box>
           </Box>
@@ -247,6 +247,7 @@ const NewPassword = ({
                     setOtpComp(false);
                   }}
                   _hover={{ textDecoration: "underline" }}
+                  cursor={'pointer'}
                 >
                   Click here to login
                 </Text>

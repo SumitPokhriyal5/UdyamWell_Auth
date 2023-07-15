@@ -211,6 +211,7 @@ const Login = ({
                 <Text
                   onClick={() => setPage(true)}
                   _hover={{ textDecoration: "underline" }}
+                  cursor={'pointer'}
                 >
                   Create an account
                 </Text>

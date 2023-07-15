@@ -355,6 +355,7 @@ const Register: React.FC<{
                   <Text
                     _hover={{ textDecoration: "underline" }}
                     onClick={() => setPage(false)}
+                    cursor={'pointer'}
                   >
                     Log in
                   </Text>

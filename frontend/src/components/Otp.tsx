@@ -213,6 +213,7 @@ const OtpPage: React.FC<OtpPageProps> = ({ setForgotPage, setOtpComp }) => {
                       isDisabled={timer > 0}
                       isLoading={otpLoad}
                       loadingText="Sending OTP..."
+                      cursor={'pointer'}
                     >
                       Send again
                     </Button>
@@ -262,6 +263,7 @@ const OtpPage: React.FC<OtpPageProps> = ({ setForgotPage, setOtpComp }) => {
                     setForgotPage(false);
                   }}
                   _hover={{ textDecoration: "underline" }}
+                  cursor={'pointer'}
                 >
                   Click here to login
                 </Text>
