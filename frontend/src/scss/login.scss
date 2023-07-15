@@ -1,0 +1,37 @@
+.container{
+    display: flex;
+    height: 750px;
+}
+.left_col{
+    width: 40%;
+    /* border: 2px solid black; */
+    // background-color:#0d7f44;
+    background: linear-gradient(to bottom, #0d763f,#199655, #b5ce53);
+    color: white;
+    padding: 30px;
+    display: grid;
+    justify-content: space-between;
+}
+
+.right_col{
+    width: 60%;
+    /* border: 2px solid red; */
+}
+@media only screen and (max-width:600px){
+    .container{
+        height: 800px;
+    }
+}
+@media only screen and (max-width:550px){
+    .container{
+        display: grid;
+        height: 1300px;
+    }
+    .left_col{
+        width: 100%;        
+    }
+    
+    .right_col{
+        width: 100%;
+    }
+}
